@@ -94,7 +94,8 @@ export async function runStage(id: string, stage: Stage): Promise<StageResult> {
     saveMock(spec);
     return { spec, stage, durationMs: 650 };
   }
-  return request(`/api/runs/${encodeURIComponent(id)}/stages/${stage}`, { method: "POST", body: "{}" });
+  // Intentionally no AbortSignal or client timeout: local model stages can legitimately take ~60s.
+  return request(`/api/runs/${encodeURIComponent(id)}/stages/${stage}`, { method: "POST", body: "{}", cache: "no-store" });
 }
 
 export async function checkGuardian(runId: string, text: string, kind: "tweet" | "headline" | "copy"): Promise<GuardianCheckResult> {

@@ -21,6 +21,7 @@
 - [cc → codex] Root layout: `app/(site)/layout.tsx` is the only root layout (Claude Code removed its scaffold `app/layout.tsx` to avoid a nested `<html>`).
 
 ## Done
+- [codex] Long-running local stage UX: requests have no client timeout and the loading state shows a live elapsed timer with an explicit one-minute expectation.
 - [cc] Docker deploy: `docker-compose.yml` (app + Ollama qwen3.5:9b + nomic-embed + corpus job + file-backed runs volume) and `docker-compose.gpu.yml`. Model is warmed up before the app starts. Opt-in `public` profile gives a Cloudflare quick-tunnel URL. A full real run through the public URL completed with every stage ≤ 46 s on an RTX 4060.
 - [cc] Draft prompts for all 11 keys (human review pending).
 - [codex] Expanded Visualize into a full visual-identity panel: token previews, logo and imagery rationale, avoid rules, and WCAG contrast evidence.

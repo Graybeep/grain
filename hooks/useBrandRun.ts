@@ -8,6 +8,7 @@ export function useBrandRun(id: string, replayGolden = false) {
   const [spec, setSpec] = useState<BrandSpec | null>(null);
   const [activeStage, setActiveStage] = useState<Stage>("intake");
   const [busyStage, setBusyStage] = useState<Stage | null>(null);
+  const [stageStartedAt, setStageStartedAt] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const refresh = useCallback(async () => {
@@ -44,6 +45,7 @@ export function useBrandRun(id: string, replayGolden = false) {
 
   const execute = useCallback(async (stage: Stage) => {
     setBusyStage(stage);
+    setStageStartedAt(Date.now());
     setError(null);
     try {
       const result = await runStage(id, stage);
@@ -54,6 +56,7 @@ export function useBrandRun(id: string, replayGolden = false) {
       setError(cause instanceof Error ? cause.message : `Unable to run ${stage}.`);
     } finally {
       setBusyStage(null);
+      setStageStartedAt(null);
     }
   }, [id]);
 
@@ -68,5 +71,5 @@ export function useBrandRun(id: string, replayGolden = false) {
   }, [id]);
 
   const completed = useMemo(() => spec ? STAGES.filter((stage) => spec.stageStatus[stage] === "done").length : 0, [spec]);
-  return { spec, activeStage, setActiveStage, busyStage, error, refresh, execute, answerInterview, selectDirection, completed };
+  return { spec, activeStage, setActiveStage, busyStage, stageStartedAt, error, refresh, execute, answerInterview, selectDirection, completed };
 }
