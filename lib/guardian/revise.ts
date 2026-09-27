@@ -41,7 +41,7 @@ export function applyRevisions(input: BrandSpec, revisions: Revision[]): { spec:
     if (!node || typeof node !== "object") continue;
     const parent = node as Record<string | number, unknown>;
     const current = parent[last];
-    if (typeof current !== "string") continue;
+    if (typeof current !== "string" || current === rev.after) continue;
     parent[last] = rev.after;
     applied.push({ ...rev, before: current });
   }

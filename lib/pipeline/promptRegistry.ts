@@ -1,4 +1,7 @@
 import type { BrandSpec, Stage, Violation } from "@/lib/schema/brandSpec";
+import { battlePrompt, divergePrompt, intakePrompt, interviewPrompt } from "./prompts/early";
+import { guardianCheckPrompt, guardianPrompt, guardianRevisePrompt, launchGuardianPrompt } from "./prompts/guardian";
+import { launchPrompt, shapePrompt, visualizePrompt } from "./prompts/identity";
 
 export type CheckKind = "tweet" | "headline" | "copy";
 
@@ -25,11 +28,22 @@ export type PromptKey = Stage | "guardian-revise" | "launch-guardian" | "guardia
  * A stage with no registered prompt (or no ANTHROPIC_API_KEY) returns fixture output
  * so the app keeps working end to end.
  *
- * TODO(human): register each prompt as it lands, e.g.
- *   import { intakePrompt } from "./prompts/intake";
- *   intake: intakePrompt,
+ * TODO(human): the prompts below are DRAFTS written by Claude Code at your request; review and rewrite them.
+ * Remove a key to send that stage back to fixture output.
  */
-export const PROMPTS: Partial<Record<PromptKey, PromptBuilder>> = {};
+export const PROMPTS: Partial<Record<PromptKey, PromptBuilder>> = {
+  intake: intakePrompt,
+  interview: interviewPrompt,
+  diverge: divergePrompt,
+  battle: battlePrompt,
+  shape: shapePrompt,
+  visualize: visualizePrompt,
+  guardian: guardianPrompt,
+  "guardian-revise": guardianRevisePrompt,
+  launch: launchPrompt,
+  "launch-guardian": launchGuardianPrompt,
+  "guardian-check": guardianCheckPrompt,
+};
 
 export function getPrompt(key: PromptKey): PromptBuilder | undefined {
   return PROMPTS[key];
