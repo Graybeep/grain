@@ -4,8 +4,8 @@ import { GuardianReport } from "./GuardianReport";
 import { IdeaBriefPanel } from "./IdeaBriefPanel";
 import { InterviewForm } from "./InterviewForm";
 import { LaunchPanel } from "./LaunchPanel";
-import { TokenPreview } from "./TokenPreview";
 import { VerbalPanel } from "./VerbalPanel";
+import { VisualPanel } from "./VisualPanel";
 
 interface Props { spec: BrandSpec; stage: Stage; busy: boolean; error: string | null; onRun: (stage: Stage) => void; onAnswers: (answers: Record<string, string>) => Promise<void>; onChoose: (direction: Direction, edits?: Partial<Direction>) => void }
 export function StagePanel({ spec, stage, busy, error, onRun, onAnswers, onChoose }: Props) {
@@ -16,7 +16,7 @@ export function StagePanel({ spec, stage, busy, error, onRun, onAnswers, onChoos
   if (stage === "interview" && spec.interview) return <InterviewForm interview={spec.interview} onSubmit={onAnswers} />;
   if ((stage === "diverge" || stage === "battle") && spec.directions) return <BattleView spec={spec} onChoose={onChoose} />;
   if (stage === "shape" && spec.verbal) return <VerbalPanel spec={spec} />;
-  if (stage === "visualize" && spec.visual) return <section className="stage-content"><header className="panel-heading"><span className="eyebrow">06 · visual identity</span><h1>Make the strategy visible.</h1><p>Tokens are constrained by the chosen direction and voice.</p></header><TokenPreview spec={spec} /></section>;
+  if (stage === "visualize" && spec.visual) return <VisualPanel spec={spec} />;
   if (stage === "guardian" && spec.guardian) return <GuardianReport report={spec.guardian} />;
   if (stage === "launch" && spec.launch) return <LaunchPanel spec={spec} sharePath={`/share/${spec.id}`} />;
   const copy: Record<Stage, [string, string]> = {
