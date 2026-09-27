@@ -1,6 +1,6 @@
 {
   "id": "golden",
-  "createdAt": "2026-09-27T00:00:00.000Z",
+  "createdAt": "2026-09-27T20:34:45.744Z",
   "stageStatus": {
     "intake": "done",
     "interview": "done",
@@ -12,128 +12,133 @@
     "launch": "done"
   },
   "idea": {
-    "rawIdea": "A shared online inventory for independent bookshops, so a customer can search once and reserve a book at the nearest indie shop that has it in stock instead of ordering from Amazon.",
-    "problem": "Readers who want to buy from independent shops can't tell which nearby shop has a book, so they default to next-day delivery from a giant retailer.",
-    "targetUser": "Urban readers aged 25–45 who already feel guilty buying books online and would walk 15 minutes to support a local shop.",
-    "context": "Independent bookshops each run separate point-of-sale systems with no shared discovery layer; many already export stock feeds nightly.",
+    "rawIdea": "An app for small construction crews to snap daily site photos and voice notes, which get turned into a clean weekly progress report for the homeowner automatically.",
+    "problem": "Homeowners feel confused by unorganized update dumps from contractors and distrust whether their project is on track without checking every photo personally.",
+    "targetUser": "Residential homeowners with mid-range renovation projects who currently rely on weekend site visits or fragmented text messages to verify progress.",
+    "context": "The housing market emphasizes transparency and speed; DIY culture makes owners expect digital proof of work at every stage.",
     "constraints": [
-      "Shops will not pay an upfront fee",
-      "Must work with existing point-of-sale exports",
-      "No delivery logistics in v1"
+      "Small crews may lack technical know-how for complex automation.",
+      "Construction timelines vary wildly by season and permit delays.",
+      "Data privacy rules govern sharing homeowner site imagery.",
+      "Hardware costs limit high-end camera specs on crew tablets."
     ],
     "assumptions": [
-      "Readers will accept same-day pickup instead of delivery",
-      "Shops will honour a 24-hour hold"
+      "Homeowners value standardized layouts over custom text notes.",
+      "Crews can consistently upload photos without strict IT supervision.",
+      "A weekly cycle aligns with typical inspection or payment milestones.",
+      "Voice transcription accuracy is sufficient for non-technical homeowners."
     ],
     "openQuestions": [
-      "Do shops want to be compared to each other on one map?",
-      "Who handles a reservation no-show?"
+      "Who owns the liability if an AI misinterprets a safety violation?",
+      "What specific renovation types generate the most photo clutter?",
+      "How do we handle crews working across multiple states with different laws?",
+      "Do users want push notifications or only email digests?"
     ]
   },
   "interview": {
     "questions": [
       {
         "id": "q1",
-        "question": "Is the first customer the reader or the bookshop owner?",
-        "whyItMatters": "It decides whose language the brand speaks and who the hero of the story is."
+        "question": "Beyond seeing progress, what specific fear of abandonment distracts your average homeowner most?",
+        "whyItMatters": "Addressing this fear defines the report's emotional tone: calm reassurance versus frantic detail."
       },
       {
         "id": "q2",
-        "question": "What should a reader feel at the moment they pick up the reserved book?",
-        "whyItMatters": "That feeling is the emotional payoff every piece of copy points toward."
+        "question": "If the weekly report feels like a sales pitch, which renovation type does that hurt you most?",
+        "whyItMatters": "This reveals the brand voice constraints, forcing us to sound purely factual for high-trust projects."
       },
       {
         "id": "q3",
-        "question": "Is taking on Amazon part of the story, or something you'd avoid saying out loud?",
-        "whyItMatters": "An explicit enemy sharpens the positioning but narrows the tone."
+        "question": "Are you building trust with busy owners who lack time, or with cautious homeowners checking every penny?",
+        "whyItMatters": "The answer determines if the brand persona is efficient and bold or meticulous and transparent."
       }
     ],
     "answers": {
-      "q1": "Readers. Shops sign up once readers show demand.",
-      "q2": "Like a bookseller put it aside for them personally.",
-      "q3": "Never name Amazon. We're for something, not against someone."
+      "q1": "Everyday people first. Warm, specific and a little playful; never corporate or preachy.",
+      "q2": "Everyday people first. Warm, specific and a little playful; never corporate or preachy.",
+      "q3": "Everyday people first. Warm, specific and a little playful; never corporate or preachy."
     }
   },
   "directions": [
     {
       "id": "A",
-      "label": "The Neighbourhood Hold",
+      "label": "The Single-Site Guard",
       "axis": "audience-wedge",
-      "positioning": "For city readers who'd rather walk to a shop than wait for a courier, the fastest way to find a book on a real shelf nearby.",
-      "differentiator": "Live stock from real shops, with a named bookseller holding your copy.",
-      "valueProp": "Search once, pick it up today, and keep your local shop alive.",
+      "positioning": "For owners of one-room renovations, the report that answers exactly one question at a time.",
+      "differentiator": "We refuse to aggregate unrelated jobs into a cluttered dashboard like competitors do.",
+      "valueProp": "You get a single page proving your small room's progress without seeing noise from other projects.",
       "traits": [
         {
-          "name": "Neighbourly",
-          "justification": "The product only works within walking distance."
+          "name": "Focused scope",
+          "justification": "Addresses 'mid-range renovation projects' by isolating one room instead of the whole house."
         },
         {
-          "name": "Quick",
-          "justification": "It competes with next-day delivery on speed of certainty."
+          "name": "No corporate jargon",
+          "justification": "Follows founder order: 'Warm, specific and a little playful'."
         },
         {
-          "name": "Warm",
-          "justification": "Readers told us the payoff is feeling personally looked after."
+          "name": "Low tech barrier",
+          "justification": "Respects constraint that 'Small crews may lack technical know-how' by keeping interfaces simple."
         }
       ],
       "antiTraits": [
-        "Preachy",
-        "Nostalgic",
-        "Corporate"
+        "Overwhelming with data",
+        "Feels like a construction firm",
+        "Uses complex automation claims"
       ]
     },
     {
       "id": "B",
-      "label": "The Bookseller's Ally",
+      "label": "The Friendly Neighbor",
       "axis": "archetype",
-      "positioning": "The quiet ally behind independent bookshops, giving them the reach of a chain without losing what makes them independent.",
-      "differentiator": "Built around booksellers' judgement, not an algorithm.",
-      "valueProp": "Every shop's shelves, one search, still personal.",
+      "positioning": "For cautious homeowners, the reliable friend who shows up weekly to show the work.",
+      "differentiator": "We speak as a partner checking in on you, not a service provider demanding compliance.",
+      "valueProp": "You feel supported against abandonment because the update sounds like a chat with an old friend.",
       "traits": [
         {
-          "name": "Loyal",
-          "justification": "The archetype is the ally who never takes the spotlight."
+          "name": "Playful tone",
+          "justification": "Honors founder instruction to be 'a little playful'."
         },
         {
-          "name": "Knowledgeable",
-          "justification": "Booksellers' expertise is the asset being amplified."
+          "name": "Trust builder",
+          "justification": "Directly solves the problem of 'distrust whether their project is on track'."
         },
         {
-          "name": "Understated",
-          "justification": "The shops are the stars; the network stays in the background."
+          "name": "Privacy first",
+          "justification": "Respects constraint that 'Data privacy rules govern sharing homeowner site imagery'."
         }
       ],
       "antiTraits": [
-        "Flashy",
-        "Techy",
-        "Salesy"
+        "Salesy language",
+        "Robotic or clinical",
+        "Dismissive of emotional fear"
       ]
     },
     {
       "id": "C",
-      "label": "Mischief on the Shelves",
+      "label": "The Honest Update",
       "axis": "tone",
-      "positioning": "A cheeky treasure map of your city's bookshops for readers who like the hunt as much as the book.",
-      "differentiator": "Turns finding a book into a small local adventure.",
-      "valueProp": "Your next book is closer than you think. Go get it.",
+      "positioning": "For busy owners, the weekly email that admits delays plainly so you know exactly where we stand.",
+      "differentiator": "We call out permit blockers and season weather instead of hiding them behind vague promises like competitors.",
+      "valueProp": "You stop guessing about timelines because we tell you the hard truth with no sales pressure.",
       "traits": [
         {
-          "name": "Playful",
-          "justification": "The tone axis pushes hard away from worthy bookishness."
+          "name": "Direct honesty",
+          "justification": "Addresses constraint that 'Construction timelines vary wildly by season'."
         },
         {
-          "name": "Curious",
-          "justification": "Rewards readers who browse and wander."
+          "name": "Anti-corporate voice",
+          "justification": "Matches founder answer: 'never corporate or preachy'."
         },
         {
-          "name": "Bold",
-          "justification": "It needs to stand out against polite literary brands."
+          "name": "Clear plain text",
+          "justification": "Fits assumption that homeowners value 'standardized layouts over custom text notes'."
         }
       ],
       "antiTraits": [
-        "Stuffy",
-        "Earnest",
-        "Beige"
+        "Obfuscating problems",
+        "Over-enthusiastic hype",
+        "Using banned terms like revolutionize"
       ]
     }
   ],
@@ -142,294 +147,314 @@
       "directionId": "A",
       "perspective": "target-user",
       "scores": {
+        "audienceFit": 2,
+        "distinctiveness": 4,
+        "credibility": 4,
+        "clarity": 5
+      },
+      "strongestPoint": "It stops me from seeing work on rooms I don't need right now.",
+      "objections": [
+        "My project covers three rooms, so one-page limits feel like a hard stop to verification.",
+        "\"One question at a time\" ignores my panic when the kitchen and baths stall together."
+      ]
+    },
+    {
+      "directionId": "A",
+      "perspective": "skeptic",
+      "scores": {
+        "audienceFit": 3,
+        "distinctiveness": 5,
+        "credibility": 4,
+        "clarity": 5
+      },
+      "strongestPoint": "Niche focus reduces support costs, but scaling requires complex room logic.",
+      "objections": [
+        "\"Refuse to aggregate\" is operationally risky; most jobs span multiple areas instantly.",
+        "Isolating one room contradicts the reality that mid-range projects rarely stick to single rooms."
+      ]
+    },
+    {
+      "directionId": "A",
+      "perspective": "cliche-hunter",
+      "scores": {
+        "audienceFit": 5,
+        "distinctiveness": 4,
+        "credibility": 4,
+        "clarity": 3
+      },
+      "strongestPoint": "Cutting clutter is a genuine benefit, though the execution risks sounding exclusionary.",
+      "objections": [
+        "\"Noise from other projects\" is vague; how do we define noise in multi-family construction?",
+        "Claiming to be \"not corporate\" while restricting scope limits market appeal unfairly."
+      ]
+    },
+    {
+      "directionId": "B",
+      "perspective": "target-user",
+      "scores": {
+        "audienceFit": 4,
+        "distinctiveness": 5,
+        "credibility": 3,
+        "clarity": 4
+      },
+      "strongestPoint": "\"Chat with an old friend\" finally sounds like someone who listens to my fear.",
+      "objections": [
+        "I need facts, not a personality check. Does \"friendly neighbor\" hide the delays?",
+        "If they lack technical know-how, can they really sound playful while managing strict deadlines?"
+      ]
+    },
+    {
+      "directionId": "B",
+      "perspective": "skeptic",
+      "scores": {
+        "audienceFit": 4,
+        "distinctiveness": 5,
+        "credibility": 3,
+        "clarity": 4
+      },
+      "strongestPoint": "Emotional trust is high value, but claiming \"reliable friend\" status ignores liability risks.",
+      "objections": [
+        "\"Supported against abandonment\" is marketing fluff; who actually gets paid if the crew quits?",
+        "A friendly tone rarely survives a permit delay that requires cold, hard legal action."
+      ]
+    },
+    {
+      "directionId": "B",
+      "perspective": "cliche-hunter",
+      "scores": {
         "audienceFit": 5,
         "distinctiveness": 3,
         "credibility": 4,
-        "clarity": 5
+        "clarity": 2
       },
-      "strongestPoint": "I instantly get it: find it nearby, grab it today.",
+      "strongestPoint": "\"Partnership\" language works well until it becomes a sales pitch disguised as friendship.",
       "objections": [
-        "What if the shop sells my copy before I get there?"
+        "\"Check in on you\" sounds like a spammy newsletter; is this really distinct from Zillow?",
+        "The \"friendly neighbor\" archetype is overused in real estate; are we just another warm fuzziness?"
       ]
     },
     {
-      "directionId": "A",
-      "perspective": "skeptic",
-      "scores": {
-        "audienceFit": 4,
-        "distinctiveness": 3,
-        "credibility": 3,
-        "clarity": 5
-      },
-      "strongestPoint": "Speed of certainty is a real edge over delivery.",
-      "objections": [
-        "Depends on stock data being accurate",
-        "Walking distance limits the market to dense cities"
-      ]
-    },
-    {
-      "directionId": "A",
-      "perspective": "cliche-hunter",
-      "scores": {
-        "audienceFit": 4,
-        "distinctiveness": 2,
-        "credibility": 4,
-        "clarity": 5
-      },
-      "strongestPoint": "The personal 'held for you' detail is specific.",
-      "objections": [
-        "'Support local' is well-worn territory"
-      ]
-    },
-    {
-      "directionId": "B",
+      "directionId": "C",
       "perspective": "target-user",
       "scores": {
-        "audienceFit": 3,
-        "distinctiveness": 3,
-        "credibility": 4,
-        "clarity": 3
-      },
-      "strongestPoint": "I like that booksellers stay in charge.",
-      "objections": [
-        "It sounds like it's for shop owners, not me"
-      ]
-    },
-    {
-      "directionId": "B",
-      "perspective": "skeptic",
-      "scores": {
-        "audienceFit": 3,
-        "distinctiveness": 3,
+        "audienceFit": 5,
+        "distinctiveness": 4,
         "credibility": 5,
-        "clarity": 3
+        "clarity": 5
       },
-      "strongestPoint": "Most credible story for signing up shops.",
+      "strongestPoint": "\"Hard truth\" saves me from feeling lied to when rain halts the work.",
       "objections": [
-        "Readers are the stated first customer, and this speaks to shops"
-      ]
-    },
-    {
-      "directionId": "B",
-      "perspective": "cliche-hunter",
-      "scores": {
-        "audienceFit": 3,
-        "distinctiveness": 2,
-        "credibility": 4,
-        "clarity": 3
-      },
-      "strongestPoint": "Avoids tech-startup language entirely.",
-      "objections": [
-        "'Reach of a chain' is a stock B2B phrase"
-      ]
-    },
-    {
-      "directionId": "C",
-      "perspective": "target-user",
-      "scores": {
-        "audienceFit": 4,
-        "distinctiveness": 5,
-        "credibility": 3,
-        "clarity": 4
-      },
-      "strongestPoint": "Makes me want to go on a book hunt this weekend.",
-      "objections": [
-        "Sometimes I just need the book, not an adventure"
+        "\"Permit blockers\" sounds scary; do I need a lawyer for every email about zoning?",
+        "Does admitting delays upfront kill my trust, or does it rebuild it faster?"
       ]
     },
     {
       "directionId": "C",
       "perspective": "skeptic",
       "scores": {
-        "audienceFit": 3,
-        "distinctiveness": 5,
-        "credibility": 2,
-        "clarity": 4
+        "audienceFit": 5,
+        "distinctiveness": 4,
+        "credibility": 5,
+        "clarity": 5
       },
-      "strongestPoint": "Easily the most memorable.",
+      "strongestPoint": "Radical transparency is rare and defensible; it cuts marketing fluff while solving the core distrust.",
       "objections": [
-        "Playfulness may undercut trust in reservations"
+        "\"No sales pressure\" means no upsells; can a free product sustain crew wages during rain?",
+        "Calling out delays plainly might scare off owners who prefer optimistic (false) promises."
       ]
     },
     {
       "directionId": "C",
       "perspective": "cliche-hunter",
       "scores": {
-        "audienceFit": 4,
-        "distinctiveness": 5,
-        "credibility": 3,
-        "clarity": 4
+        "audienceFit": 3,
+        "distinctiveness": 4,
+        "credibility": 5,
+        "clarity": 5
       },
-      "strongestPoint": "No one else in books sounds like this.",
+      "strongestPoint": "Straight talk is refreshing, but \"clear plain text\" risks sounding like a boring government memo.",
       "objections": [
-        "'Treasure map' metaphor could get cute fast"
+        "\"Anti-corporate voice\" is a cliché; showing actual warmth matters more than claiming it.",
+        "Admitting delays is good, but does this tone alienate owners who just want reassurance?"
       ]
     }
   ],
   "selection": {
-    "directionId": "A"
+    "directionId": "C"
   },
   "verbal": {
     "names": [
       {
-        "name": "Nearshelf",
-        "territory": "compound",
-        "rationale": "Says exactly what it does: the nearest shelf with your book.",
-        "genericness": 41
-      },
-      {
-        "name": "Holdfast",
-        "territory": "metaphor",
-        "rationale": "A copy held fast for you; also suggests loyalty.",
-        "genericness": 47
-      },
-      {
-        "name": "Spinewalk",
-        "territory": "invented",
-        "rationale": "Book spines plus the walk to the shop.",
-        "genericness": 33
-      },
-      {
-        "name": "Local Stock",
+        "name": "SiteTruth Weekly",
         "territory": "descriptive",
-        "rationale": "Plain and literal.",
-        "genericness": 72
+        "rationale": "Uses real construction terms and 'Weekly' for the cycle; no inventing facts.",
+        "genericness": 79
+      },
+      {
+        "name": "RawBuild Note",
+        "territory": "metaphor",
+        "rationale": "'Raw' implies unedited truth; avoids hype metaphors like 'gold standard'.",
+        "genericness": 74
+      },
+      {
+        "name": "PlainFrame App",
+        "territory": "compound",
+        "rationale": "Mixes 'Plain' tone with 'Frame' context; short and pronounceable.",
+        "genericness": 82
+      },
+      {
+        "name": "ClearCrew Log",
+        "territory": "descriptive",
+        "rationale": "Highlights the crew focus and clear output without existing big brand names.",
+        "genericness": 75
+      },
+      {
+        "name": "NoFluff Build",
+        "territory": "invented",
+        "rationale": "'No-Fluff' directly opposes sales pitch anxiety; simple two-word combo.",
+        "genericness": 74
+      },
+      {
+        "name": "StraightSite Report",
+        "territory": "metaphor",
+        "rationale": "'Straight' means direct honesty on delays; fits the anti-hype goal.",
+        "genericness": 73
       }
     ],
-    "chosenName": "Nearshelf",
+    "chosenName": "NoFluff Build",
     "tagline": {
-      "text": "Your book, on a shelf nearby.",
-      "genericness": 44
+      "text": "Delays named. Reasons clear. Pay with confidence.",
+      "genericness": 76
     },
-    "oneLiner": "Nearshelf searches the independent bookshops around you and has a bookseller hold your copy for same-day pickup.",
+    "oneLiner": "A weekly email that lists weather or permit delays plainly so homeowners pay safely.",
     "messageHierarchy": {
-      "primary": "The book you want is probably ten minutes away.",
+      "primary": "We admit delays before they become arguments.",
       "supporting": [
-        "Live stock from real independent shops",
-        "A named bookseller holds it for 24 hours",
-        "Pick it up today, no delivery wait"
+        "Permit blocks get a plain date and fix plan.",
+        "Photo clutter is removed for standardized views.",
+        "Voice notes are transcribed into easy layouts."
       ]
     },
     "voice": {
       "principles": [
-        "Talk like a neighbour, not a platform",
-        "Be specific about time and distance",
-        "Let booksellers be people"
+        "Name problems immediately without hiding them.",
+        "Keep sentences short like a text message.",
+        "Avoid corporate politeness or empty promises."
       ],
       "do": [
-        "Name the shop and the bookseller",
-        "Use minutes, not 'fast'",
-        "Keep sentences short"
+        "State 'rain stopped work' directly in lines.",
+        "Use plain verbs instead of complex nouns.",
+        "Address the homeowner like a neighbor."
       ],
       "dont": [
-        "Lecture about shopping local",
-        "Mention competitors",
-        "Use startup jargon"
+        "Do not say 'We are on track vaguely'.",
+        "Do not use phrases like 'seamless experience'.",
+        "Do not hype results with empty adjectives."
       ],
       "samples": [
-        "Mira at Paper Lantern is holding your copy until 6pm tomorrow.",
-        "Three shops within a 12-minute walk have it.",
-        "Found it. Go get it."
+        "Rain moved work. We will resume Tuesday.",
+        "Permit denied the electrical frame. Waiting now.",
+        "Here are the three photos you asked for."
       ]
     }
   },
   "visual": {
-    "fontPairingId": "dmserif-dmsans",
+    "fontPairingId": "ibmplexsans-ibmplexmono",
     "palette": [
       {
-        "name": "Ink Green",
-        "hex": "#1f4d3a",
-        "role": "primary"
-      },
-      {
-        "name": "Paper",
-        "hex": "#faf6ee",
+        "name": "Concrete Gray",
+        "hex": "#264247",
         "role": "bg"
       },
       {
-        "name": "Spine Red",
-        "hex": "#c2452d",
-        "role": "accent"
+        "name": "Safety Vest Yellow",
+        "hex": "#F7D232",
+        "role": "primary"
       },
       {
-        "name": "Shelf Oak",
-        "hex": "#b88a55",
+        "name": "Graphite Slate",
+        "hex": "#a9a9aa",
+        "role": "text"
+      },
+      {
+        "name": "Dust Orange",
+        "hex": "#E85D04",
         "role": "secondary"
       },
       {
-        "name": "Night Text",
-        "hex": "#1c1b19",
-        "role": "text"
+        "name": "Paper White",
+        "hex": "#FFFFFF",
+        "role": "accent"
       }
     ],
     "contrastChecks": [
       {
-        "fg": "#1c1b19",
-        "bg": "#faf6ee",
-        "ratio": 15.97,
+        "fg": "#F7D232",
+        "bg": "#264247",
+        "ratio": 7.28,
         "pass": true
       },
       {
-        "fg": "#1f4d3a",
-        "bg": "#faf6ee",
-        "ratio": 8.93,
+        "fg": "#a9a9aa",
+        "bg": "#264247",
+        "ratio": 4.58,
         "pass": true
       },
       {
-        "fg": "#c2452d",
-        "bg": "#faf6ee",
-        "ratio": 4.66,
+        "fg": "#FFFFFF",
+        "bg": "#264247",
+        "ratio": 10.75,
         "pass": true
       }
     ],
-    "shapeLanguage": "Soft-cornered rectangles like book spines; a single map-pin notch as the recurring motif.",
-    "imageryStyle": "Warm, daylight photos of real shop interiors and hands on books; no stock people smiling at phones.",
-    "logoBrief": "A wordmark in DM Serif Display with the 'h' ascender drawn as a book spine leaning on its neighbour.",
+    "shapeLanguage": "Sharp right angles and raw edges mirror unfinished concrete. No curves or soft fillets. Lines are thick and utilitarian like safety tape.",
+    "imageryStyle": "Flat, unedited job site shots taken at midday. Workers in uniforms with hard hats visible. Natural shadows without filters.",
+    "logoBrief": "Bold block letters for 'NoFluff' using a stencil font style. 'Build' is smaller, set tightly below, aligned left. No icon.",
     "avoid": [
-      "Map-app blue",
-      "Library clichés like owls and glasses",
-      "Parchment textures"
+      "Glossy gradients",
+      "Serum-like drop shadows",
+      "Hand-drawn sketches"
     ]
   },
   "guardian": {
     "passed": true,
     "violations": [
       {
-        "id": "det-cliche-1",
+        "id": "det-contrast-1",
         "fields": [
-          "verbal.voice.samples[2]"
+          "visual.palette[2].hex"
         ],
-        "severity": "med",
-        "rule": "cliche",
-        "explanation": "Uses banned cliché(s): unlock.",
-        "fix": "Replace with a concrete, specific claim."
+        "severity": "high",
+        "rule": "contrast",
+        "explanation": "Text #1C1D1E on background #264247 is 1.57:1, below 4.5:1.",
+        "fix": "Use #a9a9aa (4.58:1)."
       }
     ],
     "revisions": [
       {
-        "field": "verbal.voice.samples[2]",
-        "before": "Unlock your next read.",
-        "after": "Found it. Go get it.",
-        "reason": "Guardian revise pass removed the cliché and matched the quick, neighbourly voice."
+        "field": "visual.palette[2].hex",
+        "before": "#1C1D1E",
+        "after": "#a9a9aa",
+        "reason": "Adjusted lightness in code to meet WCAG AA text contrast."
       }
     ]
   },
   "launch": {
-    "heroHeadline": "The book you want is ten minutes away.",
-    "heroSub": "Nearshelf checks the independent shops around you and has a bookseller hold your copy for pickup today.",
-    "pitch": "Readers want to buy from independent bookshops but can't see what's on their shelves, so they order online. Nearshelf joins up the stock of local shops into one search and turns a reservation into a same-day pickup with a named bookseller holding the copy.",
+    "heroHeadline": "Delays named. Reasons clear.",
+    "heroSub": "We list rain or permit blocks plainly so you know exactly where we stand.",
+    "pitch": "Construction stops happen for real reasons like weather or paperwork. NoFluff Build sends a weekly email that says what stopped your crew without hiding it behind vague promises. You stop guessing timelines because we tell the hard truth with no sales pressure. This means you can pay safely and let us work without anxiety.",
     "socialPosts": [
       {
-        "platform": "x",
-        "text": "Searched for a book. Three shops within a 12-minute walk had it. Mira at Paper Lantern is holding it until 6. That's Nearshelf."
+        "platform": "linkedin",
+        "text": "Most emails hide construction delays behind \"on track\" updates that confuse homeowners. NoFluff Build changes this standard. We report permit blocks, weather stops, and material waits in plain text every week. Busy owners get clarity instead of sales pressure. Trust works better when timelines are honest."
       },
       {
-        "platform": "linkedin",
-        "text": "Independent bookshops don't lack books; they lack being findable. Nearshelf puts their live stock into one search and turns it into same-day pickups."
+        "platform": "x",
+        "text": "Stop guessing about delays. We list rain or permit blocks plainly so you know where we stand. No corporate fluff, just facts delivered every week. Pay with confidence when we admit the hard truth."
       },
       {
         "platform": "instagram",
-        "text": "Your book, on a shelf nearby. Found it, held it, go get it."
+        "text": "Construction updates should be real.☀️ Rain stopped work? We say it. Permits delayed the frame? We list the fix date. NoFluff Build sends plain weekly emails, no sales pressure. Follow for honest site news that clears your mind."
       }
     ]
   },
@@ -440,24 +465,43 @@
       "basedOn": [
         "idea.rawIdea"
       ],
-      "reason": "Structured the raw idea into problem, user and constraints."
+      "reason": "Structured the raw idea into problem, target user, context and constraints."
     },
     {
       "field": "interview.questions",
       "stage": "interview",
       "basedOn": [
-        "idea.openQuestions"
+        "idea.openQuestions",
+        "idea.assumptions"
       ],
-      "reason": "Asked about the first customer, the payoff moment and the competitor stance."
+      "reason": "Asked 3 question(s) about the gaps that most change the brand."
     },
     {
-      "field": "directions",
+      "field": "directions[A]",
       "stage": "diverge",
       "basedOn": [
         "idea",
         "interview.answers"
       ],
-      "reason": "Split on audience wedge, archetype and tone so the three options differ in kind."
+      "reason": "Direction A \"The Single-Site Guard\" diverges on the audience-wedge axis."
+    },
+    {
+      "field": "directions[B]",
+      "stage": "diverge",
+      "basedOn": [
+        "idea",
+        "interview.answers"
+      ],
+      "reason": "Direction B \"The Friendly Neighbor\" diverges on the archetype axis."
+    },
+    {
+      "field": "directions[C]",
+      "stage": "diverge",
+      "basedOn": [
+        "idea",
+        "interview.answers"
+      ],
+      "reason": "Direction C \"The Honest Update\" diverges on the tone axis."
     },
     {
       "field": "critiques",
@@ -466,42 +510,80 @@
         "directions",
         "idea.targetUser"
       ],
-      "reason": "Three critics scored each direction; A led on audience fit and clarity."
+      "reason": "Target user, skeptic and cliché hunter scored every direction (avg: A 4, B 3.8, C 4.6)."
+    },
+    {
+      "field": "selection",
+      "stage": "battle",
+      "basedOn": [
+        "directions",
+        "critiques"
+      ],
+      "reason": "Founder chose direction C."
+    },
+    {
+      "field": "verbal.names",
+      "stage": "shape",
+      "basedOn": [
+        "directions[C].positioning",
+        "directions[C].traits"
+      ],
+      "reason": "Generated 6 names across territories; each scored against the corpus."
     },
     {
       "field": "verbal.chosenName",
       "stage": "shape",
       "basedOn": [
-        "directions[A].positioning",
-        "interview.answers.q2"
+        "directions[C].positioning",
+        "directions[C].traits",
+        "verbal.names"
       ],
-      "reason": "Nearshelf is literal about distance and scored as Distinct (41)."
+      "reason": "NoFluff Build chosen (genericness 74)."
+    },
+    {
+      "field": "verbal.tagline",
+      "stage": "shape",
+      "basedOn": [
+        "directions[C].positioning",
+        "directions[C].traits",
+        "idea.targetUser"
+      ],
+      "reason": "Tagline genericness 76."
     },
     {
       "field": "verbal.voice",
       "stage": "shape",
       "basedOn": [
-        "directions[A].traits",
-        "interview.answers.q3"
+        "directions[C].traits",
+        "directions[C].antiTraits"
       ],
-      "reason": "Neighbourly, quick and warm traits became voice principles; competitors never named."
+      "reason": "Voice principles derived from the selected direction's traits and anti-traits."
     },
     {
       "field": "visual.fontPairingId",
       "stage": "visualize",
       "basedOn": [
-        "directions[A].traits"
+        "directions[C].traits"
       ],
-      "reason": "dmserif-dmsans is tagged warm and approachable, matching the traits."
+      "reason": "IBM Plex Sans + IBM Plex Mono (tags: technical, honest, engineered, utilitarian)."
     },
     {
       "field": "visual.palette",
       "stage": "visualize",
       "basedOn": [
-        "directions[A].traits",
-        "visual.avoid"
+        "directions[C].traits",
+        "verbal.voice"
       ],
-      "reason": "Book-cloth greens and reds; avoided map-app blue."
+      "reason": "5 colors; 1 contrast failure(s) for Guardian."
+    },
+    {
+      "field": "visual.logoBrief",
+      "stage": "visualize",
+      "basedOn": [
+        "directions[C].traits",
+        "verbal.chosenName"
+      ],
+      "reason": "Logo brief and shape language follow the direction's traits."
     },
     {
       "field": "guardian",
@@ -509,19 +591,43 @@
       "basedOn": [
         "verbal",
         "visual",
-        "directions[A]"
+        "selection"
       ],
-      "reason": "Caught one cliché in a voice sample and rewrote it; no cross-field violations remained."
+      "reason": "1 violation(s) caught, 1 revision(s) applied; passed."
     },
     {
-      "field": "launch",
+      "field": "visual.palette[2].hex",
+      "stage": "guardian",
+      "basedOn": [
+        "guardian.violations"
+      ],
+      "reason": "Revised by Guardian."
+    },
+    {
+      "field": "launch.heroHeadline",
       "stage": "launch",
       "basedOn": [
-        "verbal.messageHierarchy",
-        "verbal.voice",
-        "visual"
+        "verbal.messageHierarchy.primary",
+        "verbal.voice"
       ],
-      "reason": "Hero uses the primary message with a concrete time; posts follow the voice samples."
+      "reason": "Hero built on the primary message."
+    },
+    {
+      "field": "launch.socialPosts",
+      "stage": "launch",
+      "basedOn": [
+        "verbal.voice.samples",
+        "verbal.tagline"
+      ],
+      "reason": "3 posts written in the brand voice."
+    },
+    {
+      "field": "guardian",
+      "stage": "launch",
+      "basedOn": [
+        "launch"
+      ],
+      "reason": "Launch copy check: 0 issue(s)."
     }
   ]
 }

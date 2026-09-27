@@ -47,6 +47,22 @@ services:
     entrypoint: ["sh", "-c", "ollama pull \"$$EMBED\" && ollama pull \"$$MODEL\" && ollama run \"$$MODEL\" --think=false 'Reply OK.' >/dev/null"]
     restart: "no"
 
+  # Keeps the chat model resident: if anything unloads it (driver reset, network blip), reload it
+  # within a minute so no visitor's request waits minutes for a cold load.
+  warmer:
+    image: ollama/ollama:latest
+    depends_on:
+      models:
+        condition: service_completed_successfully
+    environment:
+      OLLAMA_HOST: ollama:11434
+      MODEL: ${MODEL_STRONG:-qwen3.5:9b}
+    entrypoint:
+      - sh
+      - -c
+      - while true; do ollama ps | grep -q "$$MODEL" || ollama run "$$MODEL" --think=false 'Reply OK.' >/dev/null 2>&1; sleep 60; done
+    restart: unless-stopped
+
   # One-shot: embed the corpus with the stack's own embedding model (skipped if already built).
   corpus:
     build:
