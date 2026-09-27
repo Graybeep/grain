@@ -17,6 +17,8 @@
 - [cc → codex] Root layout: `app/(site)/layout.tsx` is the only root layout (Claude Code removed its scaffold `app/layout.tsx` to avoid a nested `<html>`).
 
 ## Done
+- [codex] Verified the real HTTP workflow on all 3 fixture ideas: 8/8 stages, selection, Guardian, launch, and persisted trails.
+- [codex] Completed inline direction editing, click-to-focus decision provenance, dynamic token fonts, and backend-served golden runs.
 - [codex] Frontend: landing, studio, stage rail, interview, polished Battle, verbal/visual previews, Guardian, launch kit, decision trail, share view, mock/replay mode, responsive states.
 - [codex] Genericness badges render unavailable corpus scores as “Not measured”.
 - [cc] Scaffold: Next.js 16 + TS strict, Tailwind 4, AI SDK 7, Supabase client, `.env.example`.

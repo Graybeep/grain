@@ -58,7 +58,7 @@ export async function createRun(rawIdea: string): Promise<{ id: string; spec: Br
 }
 
 export async function getRun(id: string): Promise<BrandSpec> {
-  if (mockEnabled || id === "golden") return readMock(id);
+  if (mockEnabled) return readMock(id);
   const result = await request<{ spec: BrandSpec }>(`/api/runs/${encodeURIComponent(id)}`);
   return result.spec;
 }

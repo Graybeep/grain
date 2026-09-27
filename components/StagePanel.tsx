@@ -6,7 +6,7 @@ import { LaunchPanel } from "./LaunchPanel";
 import { TokenPreview } from "./TokenPreview";
 import { VerbalPanel } from "./VerbalPanel";
 
-interface Props { spec: BrandSpec; stage: Stage; busy: boolean; error: string | null; onRun: (stage: Stage) => void; onAnswers: (answers: Record<string, string>) => Promise<void>; onChoose: (direction: Direction) => void }
+interface Props { spec: BrandSpec; stage: Stage; busy: boolean; error: string | null; onRun: (stage: Stage) => void; onAnswers: (answers: Record<string, string>) => Promise<void>; onChoose: (direction: Direction, edits?: Partial<Direction>) => void }
 export function StagePanel({ spec, stage, busy, error, onRun, onAnswers, onChoose }: Props) {
   const status = spec.stageStatus[stage];
   if (error) return <StateCard title="The argument hit a wall" body={error} action="Retry stage" onAction={() => onRun(stage)} />;
@@ -33,4 +33,3 @@ export function StagePanel({ spec, stage, busy, error, onRun, onAnswers, onChoos
 function StateCard({ title, body, action, onAction }: { title: string; body: string; action: string; onAction: () => void }) {
   return <div className="state-card"><span className="eyebrow">Next decision</span><h1>{title}</h1><p>{body}</p><button className="primary-button" onClick={onAction}>{action}<span>→</span></button></div>;
 }
-
