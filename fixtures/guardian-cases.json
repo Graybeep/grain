@@ -1,0 +1,34 @@
+[
+  {
+    "id": "det-contrast",
+    "description": "Text color too light on the background",
+    "patch": {
+      "visual": {
+        "palette": [
+          { "name": "Ink Green", "hex": "#1f4d3a", "role": "primary" },
+          { "name": "Paper", "hex": "#faf6ee", "role": "bg" },
+          { "name": "Spine Red", "hex": "#c2452d", "role": "accent" },
+          { "name": "Shelf Oak", "hex": "#b88a55", "role": "secondary" },
+          { "name": "Pale Text", "hex": "#b5b0a5", "role": "text" }
+        ]
+      }
+    },
+    "expectFields": ["visual.palette"]
+  },
+  {
+    "id": "det-cliche-tagline",
+    "description": "Tagline uses a banned cliché",
+    "patch": { "verbal": { "tagline": { "text": "Unlock your local bookshop.", "genericness": 55 } } },
+    "expectFields": ["verbal.tagline"]
+  },
+  {
+    "id": "det-length-oneliner",
+    "description": "One-liner over 25 words",
+    "patch": {
+      "verbal": {
+        "oneLiner": "Nearshelf is a platform that searches every single independent bookshop in your city and then has a friendly bookseller hold your copy for you so you can pick it up today or tomorrow."
+      }
+    },
+    "expectFields": ["verbal.oneLiner"]
+  }
+]

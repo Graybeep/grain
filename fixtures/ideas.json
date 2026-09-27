@@ -1,0 +1,17 @@
+[
+  {
+    "id": "bookshops",
+    "label": "Indie bookshop network",
+    "rawIdea": "A shared online inventory for independent bookshops, so a customer can search once and reserve a book at the nearest indie shop that has it in stock instead of ordering from Amazon."
+  },
+  {
+    "id": "spices",
+    "label": "Regional spice club",
+    "rawIdea": "A monthly subscription that sends home cooks one unusual regional spice blend, with the story of where it comes from and three weeknight recipes that use it."
+  },
+  {
+    "id": "sitelog",
+    "label": "Construction site log",
+    "rawIdea": "An app for small construction crews to snap daily site photos and voice notes, which get turned into a clean weekly progress report for the homeowner automatically."
+  }
+]
