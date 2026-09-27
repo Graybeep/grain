@@ -1,0 +1,94 @@
+# Self-contained Grain stack: app + local LLM (Ollama). No API keys.
+#
+#   docker compose up -d --build                                   # CPU host
+#   docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d --build   # NVIDIA GPU host
+#
+# First start downloads ~7 GB of models and builds the genericness corpus (one-time).
+
+x-llm-env: &llm-env
+  LLM_PROVIDER: local
+  LOCAL_LLM_BASE_URL: http://ollama:11434/v1
+  MODEL_STRONG: ${MODEL_STRONG:-qwen3.5:9b}
+  MODEL_FAST: ${MODEL_FAST:-qwen3.5:9b}
+  EMBED_MODEL: ${EMBED_MODEL:-nomic-embed-text:v1.5}
+  EMBED_PREFIX: "clustering: "
+  LOCAL_REASONING_EFFORT: none
+  CORPUS_PATH: /data/corpus/corpus.json
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    restart: unless-stopped
+    environment:
+      # 8k context + flash attention + 8-bit KV cache keep a 9B model fully on an 8 GB GPU.
+      OLLAMA_CONTEXT_LENGTH: "${OLLAMA_CONTEXT_LENGTH:-8192}"
+      OLLAMA_FLASH_ATTENTION: "1"
+      OLLAMA_KV_CACHE_TYPE: q8_0
+      OLLAMA_KEEP_ALIVE: "-1"
+    volumes:
+      - ollama:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+
+  # One-shot: pull the models (no-op when present), then load the chat model into memory.
+  # The first load takes minutes; doing it here means no visitor ever waits for it.
+  models:
+    image: ollama/ollama:latest
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      OLLAMA_HOST: ollama:11434
+      MODEL: ${MODEL_STRONG:-qwen3.5:9b}
+      EMBED: ${EMBED_MODEL:-nomic-embed-text:v1.5}
+    entrypoint: ["sh", "-c", "ollama pull \"$$EMBED\" && ollama pull \"$$MODEL\" && ollama run \"$$MODEL\" --think=false 'Reply OK.' >/dev/null"]
+    restart: "no"
+
+  # One-shot: embed the corpus with the stack's own embedding model (skipped if already built).
+  corpus:
+    build:
+      context: .
+      target: tools
+    depends_on:
+      models:
+        condition: service_completed_successfully
+    environment: *llm-env
+    volumes:
+      - corpus:/data/corpus
+    restart: "no"
+
+  app:
+    build:
+      context: .
+      target: runner
+    depends_on:
+      corpus:
+        condition: service_completed_successfully
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    environment:
+      <<: *llm-env
+      RUNS_DIR: /data/runs
+    volumes:
+      - runs:/data/runs
+      - corpus:/data/corpus:ro
+
+  # Opt-in public URL (no account): docker compose --profile public up -d
+  # The https://*.trycloudflare.com address is printed in: docker compose logs tunnel
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    profiles: ["public"]
+    depends_on:
+      app:
+        condition: service_healthy
+    command: tunnel --no-autoupdate --url http://app:3000
+    restart: unless-stopped
+
+volumes:
+  ollama:
+  corpus:
+  runs:

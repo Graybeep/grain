@@ -37,6 +37,30 @@ Candidate names and taglines are embedded (`text-embedding-3-small`, 512 dims) a
 - **Length:** tagline ≤ 8 words, hero headline ≤ 12, one-liner ≤ 25.
 - **Name:** the chosen name must not exactly match a company in the corpus.
 
+## Deploy with Docker (recommended)
+
+One command runs the whole stack with a local LLM, no API keys and no external database:
+
+```bash
+# NVIDIA GPU host (Docker Desktop with GPU support, or the NVIDIA Container Toolkit)
+docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d --build
+
+# CPU-only host (works, but each stage is much slower)
+docker compose up -d --build
+```
+
+Open http://localhost:3000 (change the port with `APP_PORT=8080`).
+
+| Service | Role |
+|---|---|
+| `ollama` | Serves `qwen3.5:9b` (chat) and `nomic-embed-text:v1.5` (embeddings) on an internal network |
+| `models` | One-shot: pulls the models into the `ollama` volume (about 7 GB, first start only) |
+| `corpus` | One-shot: embeds the 4,000-row corpus with the stack's own embedding model (skipped once built) |
+| `app` | The Next.js server. Runs are saved as JSON files in the `runs` volume, so they survive restarts. |
+| `tunnel` | Opt-in public URL through a Cloudflare quick tunnel: `docker compose --profile public up -d`, then `docker compose logs tunnel` |
+
+Swap models with `MODEL_STRONG`, `MODEL_FAST` and `EMBED_MODEL`. Changing `EMBED_MODEL` rebuilds the corpus on the next start.
+
 ## Running locally
 
 ```bash
@@ -60,12 +84,12 @@ EMBED_PREFIX="clustering: "
 
 Then run `lms server start`, load both models, and run `npm run build-corpus`. The corpus must be built with the same embedding model used at runtime; genericness reports "not measured" otherwise. Thinking is disabled for local reasoning models (`LOCAL_REASONING_EFFORT=none`) to stay inside the 45 s stage budget. A local server isn't reachable from a Vercel deploy, so this mode is for local development and recording.
 
-Without an LLM provider configured, or before a stage's prompt is registered in `lib/pipeline/promptRegistry.ts`, stages return the golden-run fixture so the UI works end to end. Without Supabase credentials, runs are kept in memory (local development only).
+Without an LLM provider configured, or before a stage's prompt is registered in `lib/pipeline/promptRegistry.ts`, stages return the golden-run fixture so the UI works end to end. Runs are stored in Supabase when `SUPABASE_*` is set, as JSON files under `RUNS_DIR` when that is set (Docker), and in memory otherwise.
 
 | Script | Purpose |
 |---|---|
 | `npm run fetch-corpus` | Re-download the public corpus into `data/corpus-raw.csv` |
-| `npm run build-corpus` | Embed the corpus into `data/corpus.json` (needs `OPENAI_API_KEY`) |
+| `npm run build-corpus` | Embed the corpus into `data/corpus.json` (OpenAI, or the local embedding model) |
 | `npm run eval-guardian` | Score Guardian against `fixtures/guardian-cases.json` (bar: 12/15) |
 | `npm run validate-fixtures` | Check the fixtures against the schema and the contrast math |
 

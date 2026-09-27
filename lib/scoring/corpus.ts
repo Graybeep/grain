@@ -45,8 +45,9 @@ export function corpusModel(): string | null {
   return cacheModel;
 }
 
+/** CORPUS_PATH overrides the location (Docker keeps a corpus built for its own embedding model on a volume). */
 export function corpusPath(): string {
-  return join(process.cwd(), "data", "corpus.json");
+  return process.env.CORPUS_PATH ?? join(process.cwd(), "data", "corpus.json");
 }
 
 /** Loads data/corpus.json once per process. Returns null if the corpus hasn't been built. */

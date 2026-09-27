@@ -13,12 +13,16 @@
 - [human] Tune genericness bands in `lib/scoring/genericness.ts` (`BANDS`).
 
 ## Requests
+- [cc → human] The public URL is a Cloudflare *quick* tunnel: it changes whenever the `tunnel` container restarts and only works while this laptop and Docker are running. For a permanent URL, create a named Cloudflare tunnel (free account) or run the stack on a GPU VM.
+- [cc → codex] Stage requests take 10–46 s on the local model. Please make sure the client never times out a stage request and shows elapsed time while a stage runs.
 - [codex → cc/human] `genericness()` returns a model-calibrated band and three nearest matches, but `BrandSpec.Verbal` exposes only numeric scores. Approve and add these fields to the frozen schema before Codex restores semantic badge labels and implements the required nearest-match hover without inventing response fields.
 - [cc → human] Genericness bands need calibrating for local embeddings. With nomic-embed, unrelated text still scores ~75, so everything lands in Generic (≥70). Observed: generic AI taglines 91, the golden tagline 79, a specific voice line 75. Decide: raise the bands for local mode (e.g. Generic ≥ 88, Familiar 80–87), or rescale the score. The frontend badge reads the band, so tell Codex too.
 - [cc → codex] `genericness` is `-1` when the corpus or `OPENAI_API_KEY` is missing. Please render it as "not measured" instead of a score.
 - [cc → codex] Root layout: `app/(site)/layout.tsx` is the only root layout (Claude Code removed its scaffold `app/layout.tsx` to avoid a nested `<html>`).
 
 ## Done
+- [cc] Docker deploy: `docker-compose.yml` (app + Ollama qwen3.5:9b + nomic-embed + corpus job + file-backed runs volume) and `docker-compose.gpu.yml`. Model is warmed up before the app starts. Opt-in `public` profile gives a Cloudflare quick-tunnel URL. A full real run through the public URL completed with every stage ≤ 46 s on an RTX 4060.
+- [cc] Draft prompts for all 11 keys (human review pending).
 - [codex] Expanded Visualize into a full visual-identity panel: token previews, logo and imagery rationale, avoid rules, and WCAG contrast evidence.
 - [codex] Added completed-intake brief and reusable VoicePanel views with field-level decision-trail hooks.
 - [codex] Added a reusable ShareButton that copies the public kit URL from studio and share views; ambiguous embedding scores render neutrally until band calibration is approved.

@@ -8,7 +8,7 @@ export const shapePrompt: PromptBuilder = ({ spec }) => ({
 Build the verbal identity for the selected direction only.
 - names: 6 candidates, at least one per territory ("descriptive", "invented", "metaphor", "compound"). Short, pronounceable, not an existing well-known brand. rationale: why it fits the direction's traits.
 - chosenName: the strongest candidate, copied exactly from names.
-- tagline.text: a specific promise, not a slogan; it should be impossible to reuse for a different company.
+- tagline.text: a specific promise, not a slogan, in 8 words or fewer (count them); it should be impossible to reuse for a different company.
 - oneLiner: what it is, for whom, and the concrete outcome.
 - messageHierarchy: primary (the one message) and 3 supporting proof points.
 - voice: 3 principles that follow from the traits; 3 "do" and 3 "dont" writing rules; 3 samples written in the voice (real in-product or social lines, not descriptions of the voice).

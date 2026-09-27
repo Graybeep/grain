@@ -1,0 +1,10 @@
+# NVIDIA GPU override for the Ollama service (needs the NVIDIA Container Toolkit / Docker Desktop GPU support).
+services:
+  ollama:
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

@@ -3,8 +3,10 @@
  * Uses the configured embedding provider (OpenAI, or LLM_PROVIDER=local). Never runs at request time.
  *
  *   npx tsx --env-file=.env.local scripts/build-corpus.ts
+ *   npx tsx scripts/build-corpus.ts --if-stale   # skip if corpus exists for the current EMBED_MODEL
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
 import { embedTexts } from "@/lib/llm/embed";
 import { EMBED_DIMENSIONS, embedModelId, hasEmbedKey } from "@/lib/llm/models";
 import { CorpusType, corpusPath, quantize, type CorpusFile } from "@/lib/scoring/corpus";
@@ -12,7 +14,20 @@ import { parseCsv } from "./lib/csv";
 
 const BATCH = 256;
 
+function isFresh(): boolean {
+  if (!existsSync(corpusPath())) return false;
+  try {
+    return (JSON.parse(readFileSync(corpusPath(), "utf8")) as { model?: string }).model === embedModelId();
+  } catch {
+    return false;
+  }
+}
+
 async function main(): Promise<void> {
+  if (process.argv.includes("--if-stale") && isFresh()) {
+    process.stdout.write(`Corpus at ${corpusPath()} already built with ${embedModelId()}; skipping\n`);
+    return;
+  }
   if (!hasEmbedKey()) throw new Error("OPENAI_API_KEY is not set (or set LLM_PROVIDER=local)");
   const [, ...rows] = parseCsv(readFileSync("data/corpus-raw.csv", "utf8"));
   const items = rows
@@ -34,6 +49,7 @@ async function main(): Promise<void> {
     dimensions: entries[0] ? Buffer.from(entries[0].e, "base64").length : EMBED_DIMENSIONS,
     entries,
   };
+  mkdirSync(dirname(corpusPath()), { recursive: true });
   writeFileSync(corpusPath(), JSON.stringify(file));
   process.stdout.write(`Wrote ${entries.length} entries to data/corpus.json\n`);
 }

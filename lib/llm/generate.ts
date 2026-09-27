@@ -5,6 +5,8 @@ import { log } from "@/lib/log";
 import type { Stage } from "@/lib/schema/brandSpec";
 import { chatProviderOptions, languageModel, type ModelTier } from "./models";
 
+const SOFT_RETRY_BUDGET_MS = 35_000;
+
 export interface StructuredCall<T extends z.ZodType> {
   stage: Stage;
   tier: ModelTier;
@@ -26,7 +28,13 @@ export async function generateStructured<T extends z.ZodType>(call: StructuredCa
   let feedback: string | null = null;
   let lastValue: { value: z.infer<T> } | null = null;
 
+  const started = Date.now();
   for (let attempt = 1; attempt <= 2; attempt++) {
+    // A soft retry doubles a slow stage (local models); past the budget, keep the draft and let Guardian flag it.
+    if (attempt === 2 && call.refineMode === "soft" && lastValue && Date.now() - started > SOFT_RETRY_BUDGET_MS) {
+      log.warn("skipping soft retry: over time budget", { stage: call.stage, elapsedMs: Date.now() - started });
+      return lastValue.value;
+    }
     const prompt: string =
       feedback === null
         ? call.prompt
