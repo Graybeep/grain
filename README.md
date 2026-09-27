@@ -45,7 +45,22 @@ cp .env.example .env.local      # fill in keys
 npm run dev
 ```
 
-Without `ANTHROPIC_API_KEY`, or before a stage's prompt is registered in `lib/pipeline/promptRegistry.ts`, stages return the golden-run fixture so the UI works end to end. Without Supabase credentials, runs are kept in memory (local development only).
+### Local models (no API keys)
+
+With [LM Studio](https://lmstudio.ai) (or any OpenAI-compatible server), set `LLM_PROVIDER=local` in `.env.local`:
+
+```
+LLM_PROVIDER=local
+LOCAL_LLM_BASE_URL=http://localhost:1234/v1
+MODEL_STRONG=qwen/qwen3.5-9b
+MODEL_FAST=qwen/qwen3.5-9b
+EMBED_MODEL=text-embedding-nomic-embed-text-v1.5
+EMBED_PREFIX="clustering: "
+```
+
+Then run `lms server start`, load both models, and run `npm run build-corpus`. The corpus must be built with the same embedding model used at runtime; genericness reports "not measured" otherwise. Thinking is disabled for local reasoning models (`LOCAL_REASONING_EFFORT=none`) to stay inside the 45 s stage budget. A local server isn't reachable from a Vercel deploy, so this mode is for local development and recording.
+
+Without an LLM provider configured, or before a stage's prompt is registered in `lib/pipeline/promptRegistry.ts`, stages return the golden-run fixture so the UI works end to end. Without Supabase credentials, runs are kept in memory (local development only).
 
 | Script | Purpose |
 |---|---|

@@ -3,7 +3,7 @@ import type { z } from "zod";
 import { AppError } from "@/lib/errors";
 import { log } from "@/lib/log";
 import type { Stage } from "@/lib/schema/brandSpec";
-import { languageModel, type ModelTier } from "./models";
+import { chatProviderOptions, languageModel, type ModelTier } from "./models";
 
 export interface StructuredCall<T extends z.ZodType> {
   stage: Stage;
@@ -37,6 +37,7 @@ export async function generateStructured<T extends z.ZodType>(call: StructuredCa
         instructions: call.instructions,
         prompt,
         output: Output.object({ schema: call.schema }),
+        providerOptions: chatProviderOptions(),
       });
       const value = output as z.infer<T>;
       lastValue = { value };

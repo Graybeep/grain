@@ -37,6 +37,13 @@ function dequantize(b64: string): Int8Array {
 }
 
 let cache: CorpusEntry[] | null = null;
+let cacheModel: string | null = null;
+
+/** The embedding model the loaded corpus was built with (null if not built). */
+export function corpusModel(): string | null {
+  loadCorpus();
+  return cacheModel;
+}
 
 export function corpusPath(): string {
   return join(process.cwd(), "data", "corpus.json");
@@ -52,6 +59,7 @@ export function loadCorpus(): CorpusEntry[] | null {
     return null;
   }
   const file = CorpusFile.parse(JSON.parse(raw));
+  cacheModel = file.model;
   cache = file.entries.map((e) => {
     const vec = dequantize(e.e);
     let sum = 0;

@@ -1,7 +1,7 @@
 import { AppError } from "@/lib/errors";
 import { embedText } from "@/lib/llm/embed";
-import { hasEmbedKey } from "@/lib/llm/models";
-import { loadCorpus, type CorpusType } from "./corpus";
+import { embedModelId, hasEmbedKey } from "@/lib/llm/models";
+import { corpusModel, loadCorpus, type CorpusType } from "./corpus";
 
 export interface GenericnessResult {
   score: number;
@@ -18,8 +18,9 @@ export function bandFor(score: number): GenericnessResult["band"] {
   return "Distinct";
 }
 
+/** Scores are only meaningful when the query is embedded with the same model the corpus was built with. */
 export function genericnessAvailable(): boolean {
-  return hasEmbedKey() && loadCorpus() !== null;
+  return hasEmbedKey() && loadCorpus() !== null && corpusModel() === embedModelId();
 }
 
 /** Cosine similarity of `text` against every corpus entry of the same type. */

@@ -1,19 +1,19 @@
 /**
  * Offline step 2: embed every row of data/corpus-raw.csv once and write data/corpus.json.
- * Requires OPENAI_API_KEY. Never runs at request time.
+ * Uses the configured embedding provider (OpenAI, or LLM_PROVIDER=local). Never runs at request time.
  *
  *   npx tsx --env-file=.env.local scripts/build-corpus.ts
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import { embedTexts } from "@/lib/llm/embed";
-import { EMBED_DIMENSIONS } from "@/lib/llm/models";
+import { EMBED_DIMENSIONS, embedModelId, hasEmbedKey } from "@/lib/llm/models";
 import { CorpusType, corpusPath, quantize, type CorpusFile } from "@/lib/scoring/corpus";
 import { parseCsv } from "./lib/csv";
 
 const BATCH = 256;
 
 async function main(): Promise<void> {
-  if (!process.env.OPENAI_API_KEY) throw new Error("OPENAI_API_KEY is not set");
+  if (!hasEmbedKey()) throw new Error("OPENAI_API_KEY is not set (or set LLM_PROVIDER=local)");
   const [, ...rows] = parseCsv(readFileSync("data/corpus-raw.csv", "utf8"));
   const items = rows
     .filter((r) => r[0]?.trim())
@@ -30,8 +30,8 @@ async function main(): Promise<void> {
   const file: CorpusFile = {
     builtAt: new Date().toISOString(),
     source: "yc-oss/api (public Y Combinator company directory), see data/corpus-raw.csv",
-    model: process.env.EMBED_MODEL ?? "text-embedding-3-small",
-    dimensions: EMBED_DIMENSIONS,
+    model: embedModelId(),
+    dimensions: entries[0] ? Buffer.from(entries[0].e, "base64").length : EMBED_DIMENSIONS,
     entries,
   };
   writeFileSync(corpusPath(), JSON.stringify(file));
