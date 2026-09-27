@@ -16,7 +16,7 @@ export function StagePanel({ spec, stage, busy, error, onRun, onAnswers, onChoos
   if (stage === "shape" && spec.verbal) return <VerbalPanel spec={spec} />;
   if (stage === "visualize" && spec.visual) return <section className="stage-content"><header className="panel-heading"><span className="eyebrow">06 · visual identity</span><h1>Make the strategy visible.</h1><p>Tokens are constrained by the chosen direction and voice.</p></header><TokenPreview spec={spec} /></section>;
   if (stage === "guardian" && spec.guardian) return <GuardianReport report={spec.guardian} />;
-  if (stage === "launch" && spec.launch) return <LaunchPanel spec={spec} onShare={() => { window.location.href = `/share/${spec.id}`; }} />;
+  if (stage === "launch" && spec.launch) return <LaunchPanel spec={spec} sharePath={`/share/${spec.id}`} />;
   const copy: Record<Stage, [string, string]> = {
     intake: ["Turn the hunch into a brief.", "We’ll expose assumptions, constraints, and the real problem hiding inside the pitch."],
     interview: ["Ask only what changes the answer.", "Up to three adaptive questions will sharpen the strategic fork."],

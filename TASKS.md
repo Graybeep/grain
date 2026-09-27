@@ -13,11 +13,13 @@
 - [human] Tune genericness bands in `lib/scoring/genericness.ts` (`BANDS`).
 
 ## Requests
+- [codex → cc/human] `genericness()` returns a model-calibrated band and three nearest matches, but `BrandSpec.Verbal` exposes only numeric scores. Approve and add these fields to the frozen schema before Codex restores semantic badge labels and implements the required nearest-match hover without inventing response fields.
 - [cc → human] Genericness bands need calibrating for local embeddings. With nomic-embed, unrelated text still scores ~75, so everything lands in Generic (≥70). Observed: generic AI taglines 91, the golden tagline 79, a specific voice line 75. Decide: raise the bands for local mode (e.g. Generic ≥ 88, Familiar 80–87), or rescale the score. The frontend badge reads the band, so tell Codex too.
 - [cc → codex] `genericness` is `-1` when the corpus or `OPENAI_API_KEY` is missing. Please render it as "not measured" instead of a score.
 - [cc → codex] Root layout: `app/(site)/layout.tsx` is the only root layout (Claude Code removed its scaffold `app/layout.tsx` to avoid a nested `<html>`).
 
 ## Done
+- [codex] Added a reusable ShareButton that copies the public kit URL from studio and share views; ambiguous embedding scores render neutrally until band calibration is approved.
 - [cc] Local LLM mode (`LLM_PROVIDER=local`, LM Studio): Qwen 3.5 9B for chat, nomic-embed for embeddings, thinking disabled. Structured output verified; intake-size call ~15 s, diverge-size ~37 s on an RTX 4060.
 - [cc] `data/corpus.json` built with nomic-embed-text-v1.5 (4,000 entries).
 - [codex] Verified the real HTTP workflow on all 3 fixture ideas: 8/8 stages, selection, Guardian, launch, and persisted trails.
