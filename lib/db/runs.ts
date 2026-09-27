@@ -1,6 +1,7 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { AppError } from "@/lib/errors";
 import { log } from "@/lib/log";
+import { goldenSpec } from "@/lib/pipeline/fixture";
 import { BrandSpec } from "@/lib/schema/brandSpec";
 
 let client: SupabaseClient | null = null;
@@ -23,6 +24,8 @@ function warnMemory(): void {
 }
 
 export async function getRun(id: string): Promise<BrandSpec> {
+  // The golden run (demo fallback, CLAUDE.md §10) is always readable, even with an empty database.
+  if (id === "golden") return goldenSpec();
   const db = supabase();
   if (!db) {
     warnMemory();
@@ -42,6 +45,7 @@ export async function getRun(id: string): Promise<BrandSpec> {
 
 export async function saveRun(spec: BrandSpec): Promise<BrandSpec> {
   const valid = BrandSpec.parse(spec);
+  if (valid.id === "golden") throw new AppError("bad_input", "The golden run is read-only");
   const db = supabase();
   if (!db) {
     warnMemory();
