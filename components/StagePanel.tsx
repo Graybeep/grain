@@ -1,6 +1,7 @@
 import type { BrandSpec, Direction, Stage } from "../lib/client/types";
 import { BattleView } from "./BattleView";
 import { GuardianReport } from "./GuardianReport";
+import { IdeaBriefPanel } from "./IdeaBriefPanel";
 import { InterviewForm } from "./InterviewForm";
 import { LaunchPanel } from "./LaunchPanel";
 import { TokenPreview } from "./TokenPreview";
@@ -11,6 +12,7 @@ export function StagePanel({ spec, stage, busy, error, onRun, onAnswers, onChoos
   const status = spec.stageStatus[stage];
   if (error) return <StateCard title="The argument hit a wall" body={error} action="Retry stage" onAction={() => onRun(stage)} />;
   if (busy || status === "running") return <div className="state-card loading-state"><span className="thinking-mark">G</span><h2>Pressure-testing {stage}…</h2><p>The studio is generating, challenging, and validating the output.</p><div className="thinking-line"><i /></div></div>;
+  if (stage === "intake" && spec.idea && status === "done") return <IdeaBriefPanel idea={spec.idea} />;
   if (stage === "interview" && spec.interview) return <InterviewForm interview={spec.interview} onSubmit={onAnswers} />;
   if ((stage === "diverge" || stage === "battle") && spec.directions) return <BattleView spec={spec} onChoose={onChoose} />;
   if (stage === "shape" && spec.verbal) return <VerbalPanel spec={spec} />;

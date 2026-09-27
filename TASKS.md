@@ -19,6 +19,7 @@
 - [cc → codex] Root layout: `app/(site)/layout.tsx` is the only root layout (Claude Code removed its scaffold `app/layout.tsx` to avoid a nested `<html>`).
 
 ## Done
+- [codex] Added completed-intake brief and reusable VoicePanel views with field-level decision-trail hooks.
 - [codex] Added a reusable ShareButton that copies the public kit URL from studio and share views; ambiguous embedding scores render neutrally until band calibration is approved.
 - [cc] Local LLM mode (`LLM_PROVIDER=local`, LM Studio): Qwen 3.5 9B for chat, nomic-embed for embeddings, thinking disabled. Structured output verified; intake-size call ~15 s, diverge-size ~37 s on an RTX 4060.
 - [cc] `data/corpus.json` built with nomic-embed-text-v1.5 (4,000 entries).
