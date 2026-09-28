@@ -15,7 +15,7 @@ export function StagePanel({ spec, stage, busy, stageStartedAt, error, selection
   if (busy || status === "running") return <div className="state-card loading-state"><span className="thinking-mark">G</span><h2>Pressure-testing {stage}…</h2><p>The studio is generating, challenging, and validating the output.</p><StageTimer startedAt={stageStartedAt} /><div className="thinking-line"><i /></div></div>;
   if (stage === "intake" && spec.idea && status === "done") return <IdeaBriefPanel idea={spec.idea} />;
   if (stage === "interview" && spec.interview) return <InterviewForm interview={spec.interview} onSubmit={onAnswers} />;
-  if ((stage === "diverge" || stage === "battle") && spec.directions) return <BattleView spec={spec} selectionError={selectionError} selectingDirectionId={selectingDirectionId} onChoose={onChoose} />;
+  if ((stage === "diverge" || (stage === "battle" && spec.critiques)) && spec.directions) return <BattleView spec={spec} selectionError={selectionError} selectingDirectionId={selectingDirectionId} onChoose={onChoose} />;
   if (stage === "shape" && spec.verbal) return <VerbalPanel spec={spec} />;
   if (stage === "visualize" && spec.visual) return <VisualPanel spec={spec} />;
   if (stage === "guardian" && spec.guardian) return <GuardianReport report={spec.guardian} />;
