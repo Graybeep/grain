@@ -23,7 +23,7 @@ export function Studio({ id, replayGolden }: { id: string; replayGolden: boolean
   return <main className="studio-shell">
     <StageRail statuses={run.spec.stageStatus} active={run.activeStage} completed={run.completed} onSelect={run.setActiveStage} />
     <div className="studio-main" onClickCapture={traceOutput}><header className="studio-topbar"><div><span className="run-dot" /> Run / {run.spec.id.slice(0, 8)}</div>{replayGolden && <span className="replay-pill">Golden replay</span>}<button className="trail-toggle" onClick={() => { setFocusedField(null); setTrailOpen(true); }}>Decision trail <span>{run.spec.trail.length}</span></button></header>
-      <StagePanel spec={run.spec} stage={run.activeStage} busy={run.busyStage === run.activeStage} stageStartedAt={run.stageStartedAt} error={run.error} onRun={(stage) => void run.execute(stage)} onAnswers={run.answerInterview} onChoose={choose} />
+      <StagePanel spec={run.spec} stage={run.activeStage} busy={run.busyStage === run.activeStage} stageStartedAt={run.stageStartedAt} error={run.error} selectionError={run.selectionError} selectingDirectionId={run.selectingDirectionId} onRun={(stage) => void run.execute(stage)} onAnswers={run.answerInterview} onChoose={choose} />
     </div>
     <DecisionTrail entries={run.spec.trail} open={trailOpen} focusedField={focusedField} onClose={() => setTrailOpen(false)} />
     {trailOpen && <button className="trail-backdrop" aria-label="Close decision trail" onClick={() => setTrailOpen(false)} />}

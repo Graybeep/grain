@@ -10,6 +10,8 @@ export function useBrandRun(id: string, replayGolden = false) {
   const [busyStage, setBusyStage] = useState<Stage | null>(null);
   const [stageStartedAt, setStageStartedAt] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [selectionError, setSelectionError] = useState<string | null>(null);
+  const [selectingDirectionId, setSelectingDirectionId] = useState<Selection["directionId"] | null>(null);
 
   const refresh = useCallback(async () => {
     setError(null);
@@ -66,10 +68,31 @@ export function useBrandRun(id: string, replayGolden = false) {
   }, [id]);
 
   const selectDirection = useCallback(async (selection: Selection) => {
-    setSpec(await patchRun(id, { selection }));
-    setActiveStage("shape");
-  }, [id]);
+    setSelectionError(null);
+    setSelectingDirectionId(selection.directionId);
+    try {
+      if (id === "golden" || replayGolden) {
+        // The backend intentionally keeps the golden fixture read-only. Let the
+        // fallback demo exercise the founder choice without trying to persist it.
+        setSpec((current) => current ? {
+          ...current,
+          selection,
+          trail: [
+            ...current.trail.filter((entry) => entry.field !== "selection"),
+            { field: "selection", stage: "battle", basedOn: ["directions", "critiques"], reason: `Founder chose direction ${selection.directionId}${selection.edits ? " with edits" : ""}.` },
+          ],
+        } : current);
+      } else {
+        setSpec(await patchRun(id, { selection }));
+      }
+      setActiveStage("shape");
+    } catch (cause) {
+      setSelectionError(cause instanceof Error ? cause.message : "Unable to choose this direction.");
+    } finally {
+      setSelectingDirectionId(null);
+    }
+  }, [id, replayGolden]);
 
   const completed = useMemo(() => spec ? STAGES.filter((stage) => spec.stageStatus[stage] === "done").length : 0, [spec]);
-  return { spec, activeStage, setActiveStage, busyStage, stageStartedAt, error, refresh, execute, answerInterview, selectDirection, completed };
+  return { spec, activeStage, setActiveStage, busyStage, stageStartedAt, error, selectionError, selectingDirectionId, refresh, execute, answerInterview, selectDirection, completed };
 }
