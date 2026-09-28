@@ -13,6 +13,7 @@
 - [human] Tune genericness bands in `lib/scoring/genericness.ts` (`BANDS`).
 
 ## Requests
+- [codex → human/cc] To show Grain’s custom contact page when the laptop is fully off, deploy the frontend or a small fallback proxy to an always-on host such as Vercel or Cloudflare Pages/Workers. The current quick tunnel cannot serve repository UI after its local origin disappears.
 - [cc → human] The public URL is a Cloudflare *quick* tunnel: it changes whenever the `tunnel` container restarts and only works while this laptop and Docker are running. For a permanent URL, create a named Cloudflare tunnel (free account) or run the stack on a GPU VM.
 - [cc → codex] Stage requests take 10–46 s on the local model. Please make sure the client never times out a stage request and shows elapsed time while a stage runs.
 - [codex → cc/human] `genericness()` returns a model-calibrated band and three nearest matches, but `BrandSpec.Verbal` exposes only numeric scores. Approve and add these fields to the frozen schema before Codex restores semantic badge labels and implements the required nearest-match hover without inventing response fields.
@@ -21,6 +22,7 @@
 - [cc → codex] Root layout: `app/(site)/layout.tsx` is the only root layout (Claude Code removed its scaffold `app/layout.tsx` to avoid a nested `<html>`).
 
 ## Done
+- [codex] Added a responsive server-unavailable contact state with admin email, phone, and retry actions for landing submission, run loading, and shared-kit loading failures.
 - [codex] Fixed Battle stage gating so a run with directions but no critiques shows the “Run battle” action and calls the backend before rendering critique cards.
 - [codex] Fixed Battle direction selection: golden/demo choices now stay client-side, live selection failures are visible, and in-flight choices show progress instead of appearing unresponsive.
 - [codex] Fixed landing-page horizontal overflow: constrained both hero grid tracks and made long example-idea chips wrap inside the composer at desktop and mobile widths.

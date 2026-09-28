@@ -4,6 +4,7 @@ import { useState, type MouseEvent } from "react";
 import { useBrandRun } from "../hooks/useBrandRun";
 import type { Direction } from "../lib/client/types";
 import { DecisionTrail } from "./DecisionTrail";
+import { ServerUnavailable } from "./ServerUnavailable";
 import { StagePanel } from "./StagePanel";
 import { StageRail } from "./StageRail";
 
@@ -11,7 +12,9 @@ export function Studio({ id, replayGolden }: { id: string; replayGolden: boolean
   const run = useBrandRun(id, replayGolden);
   const [trailOpen, setTrailOpen] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
-  if (!run.spec) return <main className="boot-screen"><span className="brand-mark">G</span><p>{run.error ?? "Loading the argument…"}</p>{run.error && <button className="secondary-button" onClick={() => void run.refresh()}>Try again</button>}</main>;
+  if (!run.spec) return run.error
+    ? <main><ServerUnavailable onRetry={() => void run.refresh()} /></main>
+    : <main className="boot-screen"><span className="brand-mark">G</span><p>Loading the argument…</p></main>;
   const choose = (direction: Direction, edits?: Partial<Direction>) => void run.selectDirection({ directionId: direction.id, edits });
   function traceOutput(event: MouseEvent<HTMLDivElement>) {
     const target = event.target instanceof Element ? event.target.closest<HTMLElement>("[data-trace-field]") : null;
