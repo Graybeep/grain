@@ -1,5 +1,7 @@
 # Grain: adversarial AI brand studio
 
+**Team LAN** · Live demo: https://graybeep.github.io/grain/ (forwards to the running studio, or shows how to reach the admin when the GPU server is off)
+
 > Every brand decision is argued for, attacked, measured and traceable.
 
 A rough idea goes in. Grain interviews the founder, generates three deliberately different brand directions, has critics attack them, measures how generic the language is against a real corpus, builds a verbal and visual identity, runs a consistency Guardian over everything, and outputs a shareable launch kit.
